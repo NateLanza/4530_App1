@@ -6,70 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".FirstFragment">
 
-    <TextView
-        android:id="@+id/firstNameLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="First Name"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@id/firstName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/firstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="First Name"
         android:inputType="text"
-        android:layout_constraintBottom_toTopOf="@id/middleNameLabel"
-        android:layout_constraintTop_toBottomOf="@id/firstNameLabel"
-         />
-
-    <TextView
-        android:id="@+id/middleNameLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Middle Name"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@id/middleName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstName" />
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
 
     <EditText
         android:id="@+id/middleName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Middle Name"
+        android:layout_marginTop="10dp"
         android:inputType="text"
-        android:layout_constraintBottom_toTopOf="@id/lastNameLabel"
-        android:layout_constraintTop_toBottomOf="@id/middleNameLabel"
-         />
-
-    <TextView
-        android:id="@+id/lastNameLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Last Name"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@id/lastName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/middleName"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/firstName"
+        tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/lastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Last Name"
         android:inputType="text"
-        android:layout_constraintTop_toBottomOf="@+id/lastNameLabel"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/middleName" />
 
     <Button
-        android:id="@+id/button_first"
+        android:id="@+id/nextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/next"
