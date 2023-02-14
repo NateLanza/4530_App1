@@ -12,17 +12,12 @@
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_FirstFragment_to_resultActivity"
+            app:destination="@id/resultActivity" />
     </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.app1.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+    <activity
+        android:id="@+id/resultActivity"
+        android:name="com.example.app1.ResultActivity"
+        android:label="activity_result"
+        tools:layout="@layout/activity_result" />
 </navigation>
