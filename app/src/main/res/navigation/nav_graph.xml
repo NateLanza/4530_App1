@@ -19,5 +19,12 @@
         android:id="@+id/resultActivity"
         android:name="com.example.app1.ResultActivity"
         android:label="activity_result"
-        tools:layout="@layout/activity_result" />
+        tools:layout="@layout/activity_result" >
+        <argument
+            android:name="FirstName"
+            app:argType="string" />
+        <argument
+            android:name="LastName"
+            app:argType="string" />
+    </activity>
 </navigation>

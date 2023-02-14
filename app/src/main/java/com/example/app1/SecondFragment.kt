@@ -33,6 +33,18 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+
+        if (savedInstanceState != null) {
+            binding.firstNameText.text = savedInstanceState.getString("firstName")
+            binding.lastNameText.text = savedInstanceState.getString("lastName")
+        } else {
+            binding.firstNameText.text = requireArguments().getString("firstName")
+            binding.lastNameText.text = requireArguments().getString("lastName")
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

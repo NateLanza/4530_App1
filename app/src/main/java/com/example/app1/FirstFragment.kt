@@ -33,7 +33,10 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.nextButton.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_resultActivity)
+            findNavController().navigate(R.id.action_FirstFragment_to_resultActivity, Bundle().apply {
+                putString("firstName", binding.firstName.text.toString())
+                putString("lastName", binding.lastName.text.toString())
+            })
         }
     }
 
