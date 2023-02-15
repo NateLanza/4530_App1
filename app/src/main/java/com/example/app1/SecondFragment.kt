@@ -40,8 +40,10 @@ class SecondFragment : Fragment() {
             binding.firstNameText.text = savedInstanceState.getString("firstName")
             binding.lastNameText.text = savedInstanceState.getString("lastName")
         } else {
-            binding.firstNameText.text = requireArguments().getString("firstName")
-            binding.lastNameText.text = requireArguments().getString("lastName")
+            arguments?.let {
+                binding.firstNameText.text = it.getString("firstName")
+                binding.lastNameText.text = it.getString("lastName")
+            }
         }
     }
 
