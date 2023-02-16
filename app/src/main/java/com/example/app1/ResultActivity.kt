@@ -19,7 +19,7 @@ class ResultActivity : AppCompatActivity() {
 
         // Assign text fields based on input
         val nameField = findViewById<TextView>(R.id.resultText)
-        var name = if (savedInstanceState != null) {
+        val name: String = if (savedInstanceState != null) {
             savedInstanceState.getString("firstName") + " " + savedInstanceState.getString("lastName")
         } else {
             intent.getStringExtra("firstName") + " " + intent.getStringExtra("lastName")
