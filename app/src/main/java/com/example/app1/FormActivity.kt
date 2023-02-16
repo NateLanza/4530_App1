@@ -21,6 +21,7 @@ import com.example.app1.databinding.ActivityFormBinding
 class FormActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFormBinding
+    private var thumbnail : Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,21 @@ class FormActivity : AppCompatActivity() {
         binding.nextButton.setOnClickListener(this::nextActivity)
         binding.picButton.setOnClickListener(this::takePicture)
         binding.picView.visibility = View.INVISIBLE
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelable("thumbnail", thumbnail)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        thumbnail = savedInstanceState.getParcelable("thumbnail", Bitmap::class.java)
+        if (thumbnail != null) {
+            binding.picView.setImageBitmap(thumbnail)
+            binding.picView.visibility = View.VISIBLE
+            binding.picButton.visibility = View.INVISIBLE
+        }
     }
 
     /**
@@ -50,12 +66,13 @@ class FormActivity : AppCompatActivity() {
     private val cameraActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
             // Set the image bitmap
-            (findViewById<View>(R.id.picView) as ImageView).
-                setImageBitmap(result.data!!.extras!!.
-                getParcelable("data", Bitmap::class.java))
+            var bitmap = result.data!!.extras!!.getParcelable("data", Bitmap::class.java)
+            (findViewById<View>(R.id.picView) as ImageView).setImageBitmap(bitmap)
             // Make the image visible
             binding.picView.visibility = View.VISIBLE
             binding.picButton.visibility = View.INVISIBLE
+            // Save data
+            thumbnail = bitmap
         }
     }
 
