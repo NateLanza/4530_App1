@@ -26,4 +26,10 @@ class ResultActivity : AppCompatActivity() {
         }
         nameField.text = "$name is logged in!"
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("firstName", intent.getStringExtra("firstName"))
+        outState.putString("lastName", intent.getStringExtra("lastName"))
+    }
 }
