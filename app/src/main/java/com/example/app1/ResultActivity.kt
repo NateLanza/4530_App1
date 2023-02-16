@@ -22,11 +22,11 @@ class ResultActivity : AppCompatActivity() {
         val firstNameField = findViewById<TextView>(R.id.firstNameText)
         val lastNameField = findViewById<TextView>(R.id.lastNameText)
         if (savedInstanceState != null) {
-            firstNameField.text = savedInstanceState.getString("firstName")
-            lastNameField.text = savedInstanceState.getString("lastName")
+            firstNameField.text = "First Name: " + savedInstanceState.getString("firstName")
+            lastNameField.text = "Last Name: " + savedInstanceState.getString("lastName")
         } else {
-            firstNameField.text = intent.getStringExtra("firstName")
-            lastNameField.text = intent.getStringExtra("lastName")
+            firstNameField.text = "First Name: " + intent.getStringExtra("firstName")
+            lastNameField.text = "Last Name: " + intent.getStringExtra("lastName")
         }
     }
 }
