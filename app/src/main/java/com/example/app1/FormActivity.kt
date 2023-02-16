@@ -1,7 +1,10 @@
 package com.example.app1
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -10,7 +13,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.app1.databinding.ActivityFormBinding
 
 class FormActivity : AppCompatActivity() {
@@ -24,6 +29,34 @@ class FormActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.nextButton.setOnClickListener(this::nextActivity)
+        binding.picButton.setOnClickListener(this::takePicture)
+        binding.picView.visibility = View.INVISIBLE
+    }
+
+    /**
+     * This function is called when the camera button is clicked.
+     */
+    private fun takePicture(view: View) {
+        // Create an intent to open the camera
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        // Start the camera activity and catch exception
+        try {
+            cameraActivity.launch(cameraIntent)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(this, "Camera not found", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private val cameraActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            // Set the image bitmap
+            (findViewById<View>(R.id.picView) as ImageView).
+                setImageBitmap(result.data!!.extras!!.
+                getParcelable("data", Bitmap::class.java))
+            // Make the image visible
+            binding.picView.visibility = View.VISIBLE
+            binding.picButton.visibility = View.INVISIBLE
+        }
     }
 
     /**
