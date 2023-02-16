@@ -6,12 +6,6 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -23,6 +17,9 @@ class FormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFormBinding
     private var thumbnail : Bitmap? = null
 
+    /**
+     * Set onClickListeners and hide the image view
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,11 +31,17 @@ class FormActivity : AppCompatActivity() {
         binding.picView.visibility = View.INVISIBLE
     }
 
+    /**
+     * Save the thumbnail image if we have one
+     */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelable("thumbnail", thumbnail)
     }
 
+    /**
+     * Restore the thumbnail image if we have one
+     */
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         thumbnail = savedInstanceState.getParcelable("thumbnail", Bitmap::class.java)
@@ -63,10 +66,14 @@ class FormActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This function is called when the camera activity returns a result.
+     * It sets the thumbnail bitmap and makes the thumbnail visible.
+     */
     private val cameraActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
             // Set the image bitmap
-            var bitmap = result.data!!.extras!!.getParcelable("data", Bitmap::class.java)
+            val bitmap = result.data!!.extras!!.getParcelable("data", Bitmap::class.java)
             (findViewById<View>(R.id.picView) as ImageView).setImageBitmap(bitmap)
             // Make the image visible
             binding.picView.visibility = View.VISIBLE
